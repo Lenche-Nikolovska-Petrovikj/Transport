@@ -1,0 +1,73 @@
+﻿@model Application.ViewModels.TransportViewModel
+@{
+    ViewBag.Title = "Add Offer";
+
+ }
+  
+<h2>@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-md-12">
+        <br />
+        <br />
+        <p>
+            This demonstrates getting and displaying the distance between two points
+        </p>
+
+        <div>
+            <div>
+                Travel From : <input id="travelfrom" type="text" name="name" value="Chichester, UK" />
+                To : <input id="travelto" type="text" name="name" value="Goodwood aerodrone, UK" />
+                <input type="button" value="Get Route" onclick="GetRoute()" />
+
+            </div>
+            <br />
+            <div>
+                <div id="dvDistance">
+                </div>
+            </div>
+
+        </div>
+
+        <div id="dvMap" style="min-height:100px"></div>
+
+    </div>
+</div>
+<fieldset>
+    <legend>Get Your Offer!</legend>
+    <br />
+    <form asp-controller="Product" asp-action="Add" method="post" class="mt-3">
+        <input type="hidden" asp-for="Id" />
+        <div class="form-group row">
+            <div class="col-md-3">
+                <label asp-for="Distance" class="col-form-label"></label>
+                <input asp-for="Distance" class="form-control" placeholder="Distance">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-3">
+                <label asp-for="LivingArea" class="col-form-label"></label>
+                <input asp-for="LivingArea" class="form-control" placeholder="LivingArea">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-3">
+                <label asp-for="AtticArea" class="col-form-label"></label>
+                <input asp-for="AtticArea" class="form-control" placeholder="AtticArea">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-3">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                    <label class="form-check-label" for="Piano">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                    <label class="form-check-label" for="Piano">No</label>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-info btn-sm" type="submit">Price Offer</button>
+    </form>
+</fieldset>
