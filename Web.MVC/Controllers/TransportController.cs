@@ -1,12 +1,13 @@
 ﻿using Application.Interfaces;
 using Application.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
 
 namespace Web.MVC.Controllers
 {
-
+    
     public class TransportController : Controller
     {
         private readonly ITransportService _transportService;
@@ -14,7 +15,7 @@ namespace Web.MVC.Controllers
         {
             _transportService = transportService;
         }
-      
+
         public IActionResult Index()
         {
             var transportListViewModel = _transportService.GetTransports();

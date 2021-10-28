@@ -46,19 +46,51 @@ namespace Web.MVC.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> SignIn(SignInViewModel userM)
+        public async Task<IActionResult> SignIn(SignInViewModel userModel)
         {
-          
+            if (ModelState.IsValid)
             {
-                var signInResult = await _signInManager.PasswordSignInAsync(userM.Username, userM.Password, userM.RememberMe, false);
-                if (signInResult.Succeeded)
+                try
                 {
-                    return RedirectToAction("Index", "Transport");
+                    var user = await _userManager.FindByNameAsync(userModel.Username);
+                    if (user != null)
+                    {
+                        await _signInManager.SignInAsync(user, userModel.RememberMe);
+                        return RedirectToAction("Index", "Transport");
+                    }
+                    ModelState.AddModelError(nameof(userModel.Username), "SinIn Failed: Invalid Email or password");
                 }
-               
-            }
+                catch (System.Exception ex)
+                {
 
-            return View(userM);
+                    throw ex;
+                } 
+            }
+            return View(userModel);
+            /*{
+                
+                try
+                {
+                    var user = await _userManager.FindByNameAsync(userModel.Username);
+                    var password = await _userManager.CheckPasswordAsync(user, userModel.Password);
+
+                    var signInResult = await _signInManager.PasswordSignInAsync(user, userModel.Password, userModel.RememberMe, false);
+                   
+                    if (signInResult.Succeeded)
+                    {
+                        return RedirectToAction("Index", "Transport");
+                    }
+                    return View(userModel);
+
+                }
+                catch (System.Exception ex)
+                {
+                    return View(userModel);
+                    //throw ex;
+                }
+                
+            }*/
+            
         }
         public new async Task<IActionResult> SignOut()
         {

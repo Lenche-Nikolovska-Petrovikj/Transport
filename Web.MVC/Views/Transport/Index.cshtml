@@ -18,38 +18,14 @@
     </thead>
     <tbody>
         @{ foreach (var transport in Model.Transports)
-            {
-                int price = 0;
-                int distPrice;
-                int volumeCalc = ((transport.LivingArea + (transport.AtticArea * 2)) / 50);
-                if (transport.Distance < 50)
-                {
-                    distPrice = 1000 + (transport.Distance * 10);
-                }
-                else if (transport.Distance > 50 || transport.Distance < 100)
-                {
-                    distPrice = 5000 + (transport.Distance * 8);
-                }
-                else
-                {
-                    distPrice = 10000 + (transport.Distance * 7);
-                }
-                price = distPrice * volumeCalc;
-                string piano;
-                if (transport.Piano)
-                {
-                    piano = "Yes";
-                }
-                else piano = "No";
-
+            {            
 <tr>
-
     <td>@transport.Distance /km</td>
     <td>@transport.LivingArea /m2</td>
     <td>@transport.AtticArea /m2</td>
     <td>@transport.DistancePriceCar</td>
-    <td>@piano</td>
-    <td>@price SEK</td>
+    <td>@transport.Piano</td>
+    <td>@transport.Price SEK</td>
    
 </tr> } }
     </tbody>

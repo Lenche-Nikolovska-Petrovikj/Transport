@@ -3,6 +3,7 @@
 
 namespace Infrastructure.Data.Models
 {
+   
     public class Transport : AuditableBaseEntity
     {
         public int Distance { get; set; }
@@ -25,10 +26,24 @@ namespace Infrastructure.Data.Models
         {
             get
             {
-                int volumeCalc = DistancePriceCar;
-                int distance = Distance;
-                int total = volumeCalc + distance;
-                return total;
+                int distPrice;
+                int volumeCalc = ((LivingArea + (AtticArea * 2)) / 50);
+                if (Distance < 50)
+                {
+                    distPrice = 1000 + (Distance * 10);
+                }
+                else if (Distance > 50 || Distance < 100)
+                {
+                    distPrice = 5000 + (Distance * 8);
+                }
+                else
+                {
+                    distPrice = 10000 + (Distance * 7);
+                }
+                var price = distPrice * volumeCalc;
+                var totalPrice = Piano ? price + 5000 : price;
+                return totalPrice;
+
             }
         }
 
