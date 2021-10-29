@@ -21,14 +21,14 @@ namespace Web.MVC.Controllers
             var transportListViewModel = _transportService.GetTransports();
             return View(transportListViewModel);
         }
-        
-        public IActionResult Add()
-        {
-           
-            return View();
-        }
+
+        //public IActionResult Add()
+        //{
+
+        //    return View();
+        //}
       
-        public IActionResult AddTransport(Guid id)
+        public IActionResult Add(Guid id)
         {
 
             if (id == Guid.Empty)
@@ -38,7 +38,8 @@ namespace Web.MVC.Controllers
             var transportVM = _transportService.GetTransportById(id);
             return View(transportVM);
         }
-        public IActionResult AddTranport(TransportViewModel transportViewModel)
+        [HttpGet]
+        public IActionResult Add(TransportViewModel transportViewModel)
         {
             if (transportViewModel.Id == Guid.Empty)
             {
@@ -47,11 +48,11 @@ namespace Web.MVC.Controllers
             return RedirectToAction("Index");
         }
         [HttpPost]
-        public IActionResult AddTransport(TransportViewModel transportViewModel, int i)
+        public IActionResult Add(TransportViewModel transportViewModel, int i)
         {
             if (transportViewModel.Id == Guid.Empty)
             {
-                _transportService.AddTransport(transportViewModel);
+                _transportService.Add(transportViewModel);
                 return RedirectToAction("Index");
             }
             return RedirectToAction("Index");

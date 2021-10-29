@@ -19,7 +19,7 @@ namespace Application.Services
             _mapper = mapper;
         }
 
-        public TransportViewModel AddTransport(TransportViewModel transportRequest)
+        public TransportViewModel Add(TransportViewModel transportRequest)
         {
             var transport = _mapper.Map<Transport>(transportRequest);
             var addedTransport = _transportRepository.Add(transport);

@@ -8,7 +8,7 @@ namespace Application.Interfaces
     {
         TransportListViewModel GetTransports();
         TransportViewModel GetTransportById(Guid id);
-        TransportViewModel AddTransport(TransportViewModel transportRequest);
+        TransportViewModel Add(TransportViewModel transportRequest);
         void Delete(Guid id);
     }
 }
